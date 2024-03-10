@@ -3,7 +3,7 @@
 import { BookPreview } from "./BookPreview.jsx"
 
 
-export function BookList({ books, onRemoveCar, onUpdateCar, onSelectCar }) {
+export function BookList({ books, onRemoveCar, onUpdateCar, onSelectBook }) {
 
 	// function onChangeSpeed(car) {
 	// 	car = { ...car, maxSpeed: car.maxSpeed + 10 }
@@ -13,13 +13,15 @@ export function BookList({ books, onRemoveCar, onUpdateCar, onSelectCar }) {
 	if (!books.length) return <div>No books to show</div>
 	return <ul className="book-list">
 		{
-			books.map(book => <li key={book.id}>
-				<BookPreview book={book} />
-				{/* <div className="car-actions"> */}
-					{/* <button className="remove-btn" onClick={() => onRemoveCar(car.id)}>X</button>
-					<button onClick={() => { onChangeSpeed(car) }}>Increase speed</button>
-					<button onClick={() => { onSelectCar(car) }}>Select car</button> */}
-				{/* </div> */}
+			books.map((book,idx) => <li key={book.id}>
+				<BookPreview 
+                book={book}
+                idx={idx} />
+				<div className="book-actions">
+					<button className="remove-btn" onClick={() => onRemoveBook(book.id)}>X</button>
+					<button onClick={() => { onChangePrice(book) }}>Change Price</button>
+					<button onClick={() => { onSelectBook(book) }}>Select book</button>
+				</div>
 			</li>)
 		}
 	</ul>

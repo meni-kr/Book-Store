@@ -52,7 +52,7 @@ function getEmptyBook(title = '', amount = 0) {
     return {
         id: '',
         title,
-        description: '',
+        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, autem iure natus, rerum commodi, ab non tempora voluptates pariatur odit impedit et. Architecto, iste saepe aspernatur id similique atque neque.',
         thumbnail: `http://coding-academy.org/books-photos/20.jpg`,
         listPrice: { 
                amount,
@@ -86,7 +86,7 @@ function _createBooks() {
     if (!books || !books.length) {
         books = []
         books.push(_createBook('The wheel of Time', 300))
-        books.push(_createBook('Whe name of the Wind', 120))
+        books.push(_createBook('The name of the Wind', 120))
         books.push(_createBook('Without A Word', 100))
         books.push(_createBook('The Death Gate Cycle', 150))
         utilService.saveToStorage(BOOK_KEY, books)
@@ -108,21 +108,3 @@ function _createBook(title, listPrice) {
     
 // }
 
-
-
-
-
-
-
-// {
-//     "id": "OXeMG8wNskc",
-//     "title": "metus hendrerit",
-//     "description": "placerat nisi sodales suscipit tellus",
-//     "thumbnail": “http://coding-academy.org/books-photos/
-//    20.jpg",
-//     "listPrice": { 
-//            "amount": 109,
-//            "currencyCode": "EUR",
-//            "isOnSale": false
-//       }
-//     }

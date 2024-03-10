@@ -2,12 +2,13 @@ const { useState, useEffect } = React
 
 import { bookService } from "../services/book.service.js"
 import { BookList } from "../cmps/BookList.jsx"
+import { BookDetails } from "../cmps/BookDetails.jsx"
 
 
 export function BookIndex() {
     const [books, setBooks] = useState(null)
     // const [filterBy, setFilterBy] = useState(carService.getDefaultFilter())
-    // const [selectedCar, setSelectedCar] = useState(null)
+    const [selectedBook, setSelectedBook] = useState(null)
     // const [userMsg, setUserMsg] = useState('')
 
     useEffect(() => {
@@ -49,10 +50,10 @@ export function BookIndex() {
     //         })
     // }
 
-    // function onSelectCar(car) {
-    //     console.log('selected car', car)
-    //     setSelectedCar(car)
-    // }
+    function onSelectBook(book) {
+        console.log('selected book', book)
+        setSelectedBook(book)
+    }
 
     // function flashMsg(txt) {
     //     setUserMsg(txt)
@@ -65,37 +66,54 @@ export function BookIndex() {
     // console.log('selectedCar from car index', selectedCar)
     if (!books) return <div>loading...</div>
     return <section className="book-index">
-        <h1>Our Books</h1>
-        <BookList
-            books={books}
-            // onRemoveCar={onRemoveCar}
-            // onUpdateCar={onUpdateCar}
-            // onSelectCar={onSelectCar}
-        />
+        {
+            !selectedBook && <React.Fragment>
+                {/* <CarFilter
+                onSetFilter={onSetFilter}
+                filterBy={filterBy} /> */}
+                <h1>Our Books</h1>
+                <BookList
+                    books={books}
+                    // onRemoveCar={onRemoveCar}
+                    // onUpdateCar={onUpdateCar}
+                    onSelectBook={onSelectBook}
+                />
+            </React.Fragment>
+        }
+
+        {
+            selectedBook && <BookDetails
+                book={selectedBook}
+                onGoBack={() => onSelectBook(null)}
+            />
+        }
+
+     {/* <UserMsg msg={userMsg} /> */}
+
 
     </section >
 }
 
 
 // !selectedCar && <React.Fragment>
-//                 <CarFilter
+//     {/* <CarFilter
 //                     onSetFilter={onSetFilter}
-//                     filterBy={filterBy} />
-//                 <h1>Our cars</h1>
-//                 <CarList
-//                     cars={cars}
-//                     onRemoveCar={onRemoveCar}
-//                     onUpdateCar={onUpdateCar}
-//                     onSelectCar={onSelectCar}
-//                 />
-//             </React.Fragment>
-//         }
+//                     filterBy={filterBy} /> */}
+//     <h1>Our Books</h1>
+//     <BookList
+//         books={books}
+//         // onRemoveCar={onRemoveCar}
+//         // onUpdateCar={onUpdateCar}
+//         onSelectBook={onSelectBook}
+//     />
+// </React.Fragment>
 
-//         {
-//             selectedCar && <CarDetails
-//                 car={selectedCar}
-//                 onGoBack={() => onSelectCar(null)}
-//             />
-//         }
 
-//         <UserMsg msg={userMsg} />
+// {
+//     selectedCar && <CarDetails
+//         car={selectedCar}
+//         onGoBack={() => onSelectCar(null)}
+//     />
+// }
+
+// <UserMsg msg={userMsg} />
