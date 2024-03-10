@@ -1,6 +1,6 @@
 .book-list{
-    gap:0 10px;
     flex-wrap: wrap;
+    justify-content: space-around;
     /* background-color: var(--main-clr); */
     
     
@@ -10,7 +10,7 @@
     /* border: 1px solid black; */
     padding: 5px;
     width: 300px;
-    margin-bottom:10px ;
+    margin-bottom:20px ;
     background-color:var(--main-clr-4) ;
     color: var(--main-clr-0);
     

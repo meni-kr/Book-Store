@@ -1,22 +1,44 @@
 
 
-export function BookDetails({ book, onGoBack }){
-    // Render time methods
+export function BookDetails({ book, onGoBack }) {
+	// Render time methods
 
-	// function getSpeedClass() {
-	// 	if (car.maxSpeed > 100) return 'fast'
-	// 	else if (car.maxSpeed < 80) return 'slow'
-	// 	else return ''
-	// }
 	
+	function getReadingType(){
+		if(book.pageCount >500) return 'Serious Reading!'
+		else if(book.pageCount > 200) return 'Descent Reading'
+		else return 'Light Reading'
+	}
+	
+	function getPublishedDate(){
+		const thisYear = new Date().getFullYear()
+		const diff = thisYear - book.publishedDate
+		if (diff >= 10) return ' Vintage'
+		if (diff <=1) return 'New'
+	}
+	
+		function getPriceClass() {
+			if (book.listPrice.amount > 150) return ' red'
+			else if (book.listPrice.amount < 20) return ' green'
+			else return ''
+		}
+
 	return <section className="book-details">
 		<button onClick={onGoBack}>Go back</button>
 		<h1>Title : {book.title}</h1>
+		<p>author: {book.authors.map(author => author + ' ')}</p>
+		<h2>subtitle : {book.subtitle}</h2>
 		{/* <h5 className={getSpeedClass()}>Max speed: {car.maxSpeed}</h5> */}
-        <img src={`/assets/img/1.jpg`} alt={book.title} />
+		<img src={book.thumbnail} alt={book.title} />
+		<div>
+			<p>page count: {book.language}</p>
+			<p>{getPublishedDate()}</p>
+			<p>{getReadingType()}</p>
+			<p>categories: {book.categories.map(categorie => categorie + ' ')}</p>
+		</div>
 		<p>{book.description}</p>
-        <p>Price:{book.listPrice.amount} : {book.listPrice.currencyCode}</p>
-		<p>{(book.listPrice.isOnSale)? 'on Sale' : 'Not on Sale'}</p>
+		<p className={getPriceClass()}>Price:{book.listPrice.amount} : {book.listPrice.currencyCode}</p>
+		<p>{(book.listPrice.isOnSale) ? 'on Sale' : 'Not on Sale'}</p>
 	</section>
 }
 
