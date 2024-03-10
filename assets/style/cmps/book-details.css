@@ -1,3 +1,71 @@
+.book-details{
+    position: relative;
+    display: flex;
+    flex-flow: column;
+
+}
+
+
+.book-details .on-sale{
+    position: absolute;
+    right: 0;
+    width: 100px;
+}
+
+.book-details-header{
+    display: flex;
+    flex-direction: column;
+    align-items:center ;
+    font-size: 30px;
+}
+
+.book-details-header h1{
+    font-size: 2em;
+}
+
+.book-details-header p{
+    margin: 0;
+    font-size: 1em;
+}
+
+.book-details-header h2{
+    font-size: 1.5em;
+}
+
+.book-details-main{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+.book-details-aside{
+    display: flex;
+    flex-direction: column;
+    align-items:center ;
+    justify-content: center;
+    padding-inline:10px ;
+
+    font-size: 20px;
+}
+
+.book-details-aside p{
+    font-size: 1em;
+}
+
+.book-details-main img{
+    width: 30%;
+}
+
+.btn-go-back{
+    align-self: start;
+}
+
+
+
+
+
+
+
+
 
 .book-details .red{
     color: red;
