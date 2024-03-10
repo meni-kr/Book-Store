@@ -1,0 +1,20 @@
+.book-preview{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.book-actions{
+    display: flex;
+    justify-content: center;
+}
+
+.book-preview .on-sale{
+position: absolute;
+width: 15%;
+
+right: -5px;
+top: -8px;
+filter: drop-shadow(1px 5px 10px var(--main-clr));
+}
