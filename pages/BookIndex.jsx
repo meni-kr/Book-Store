@@ -1,26 +1,28 @@
 const { useState, useEffect } = React
 
-import { bookService } from "../services/book.service.js"
 import { BookList } from "../cmps/BookList.jsx"
 import { BookDetails } from "../cmps/BookDetails.jsx"
+import { BookFilter } from "../cmps/BookFilter.jsx"
+
+import { bookService } from "../services/book.service.js"
 
 
 export function BookIndex() {
     const [books, setBooks] = useState(null)
-    // const [filterBy, setFilterBy] = useState(carService.getDefaultFilter())
+    const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter())
     const [selectedBook, setSelectedBook] = useState(null)
     // const [userMsg, setUserMsg] = useState('')
 
     useEffect(() => {
         loadBooks()
-    }, [])
+    }, [filterBy])
 
-    // function onSetFilter(fieldsToUpdate) {
-    //     setFilterBy(prevFilter => ({ ...prevFilter, ...fieldsToUpdate }))
-    // }
+    function onSetFilter(fieldsToUpdate) {
+        setFilterBy(prevFilter => ({ ...prevFilter, ...fieldsToUpdate }))
+    }
 
     function loadBooks() {
-        bookService.query()
+        bookService.query(filterBy)
             .then((books) => {
                 setBooks(books)
             })
@@ -62,15 +64,13 @@ export function BookIndex() {
     //     }, 3000)
     // }
 
-    // console.log('cars from car index', cars)
-    // console.log('selectedCar from car index', selectedCar)
     if (!books) return <div>loading...</div>
     return <section className="book-index">
         {
             !selectedBook && <React.Fragment>
-                {/* <CarFilter
+                <BookFilter
                 onSetFilter={onSetFilter}
-                filterBy={filterBy} /> */}
+                filterBy={filterBy} />
                 <h1>Our Books</h1>
                 <BookList
                     books={books}
@@ -93,27 +93,3 @@ export function BookIndex() {
 
     </section >
 }
-
-
-// !selectedCar && <React.Fragment>
-//     {/* <CarFilter
-//                     onSetFilter={onSetFilter}
-//                     filterBy={filterBy} /> */}
-//     <h1>Our Books</h1>
-//     <BookList
-//         books={books}
-//         // onRemoveCar={onRemoveCar}
-//         // onUpdateCar={onUpdateCar}
-//         onSelectBook={onSelectBook}
-//     />
-// </React.Fragment>
-
-
-// {
-//     selectedCar && <CarDetails
-//         car={selectedCar}
-//         onGoBack={() => onSelectCar(null)}
-//     />
-// }
-
-// <UserMsg msg={userMsg} />
