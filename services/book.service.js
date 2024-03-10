@@ -1,6 +1,9 @@
 import { utilService } from './util.service.js'
 import { storageService } from './async-storage.service.js'
 
+import { demoBooks } from '../booksDemo.js'
+console.log('books:', demoBooks)
+
 const BOOK_KEY = 'bookDB'
 var gFilterBy 
 _createBooks()
@@ -51,17 +54,25 @@ function save(book) {
 function getEmptyBook(title = '', amount = 0) {
     // return { id: '', title, listPrice }
     return {
-        id: '',
+        id:'',
         title,
-        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, autem iure natus, rerum commodi, ab non tempora voluptates pariatur odit impedit et. Architecto, iste saepe aspernatur id similique atque neque.',
-        thumbnail: `http://coding-academy.org/books-photos/20.jpg`,
+        subtitle: '',
+        authors: [ "Barbara Cartland" ],
+        publishedDate: utilService.getRandomIntInclusive(1990,2003),
+        description: utilService.makeLorem(50),
+        pageCount: utilService.getRandomIntInclusive(80,300),
+        categories: [ "Computers", "Hack" ],
+        thumbnail: "http://ca.org/books-photos/20.jpg",
+        language: "en",
         listPrice: { 
-               amount,
-               currencyCode: "EUR",
-               isOnSale: false
-          }
+        amount,
+        currencyCode: "EUR",
+        isOnSale: false
         }
+    }
 }
+
+
 
 function getDefaultFilter() {
     return { txt: '', minPrice: 50, desc: '' }
@@ -89,11 +100,12 @@ function getNextBookId(bookId) {
 function _createBooks() {
     let books = utilService.loadFromStorage(BOOK_KEY)
     if (!books || !books.length) {
-        books = []
-        books.push(_createBook('The wheel of Time', 300))
-        books.push(_createBook('The name of the Wind', 120))
-        books.push(_createBook('Without A Word', 100))
-        books.push(_createBook('The Death Gate Cycle', 150))
+        books = booksDemo.demoBooks
+        // books.push(_createBook('The wheel of Time', 300))
+        // books.push(_createBook('The name of the Wind', 120))
+        // books.push(_createBook('Without A Word', 100))
+        // books.push(_createBook('The Death Gate Cycle', 150))
+        console.log('books:', books)
         utilService.saveToStorage(BOOK_KEY, books)
     }
 }

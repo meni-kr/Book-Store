@@ -11,4 +11,12 @@
   --gray2: rgb(155, 155, 155);
   --gray3: rgb(44, 44, 44);
 
+  /* book list */
+
+  --main-clr-0: #1b2727;
+  --main-clr: #3c5148;
+  --main-clr-1: #6b8e4e;
+  --main-clr-3: #b2c5b2;
+  --main-clr-4: #d5dddf;
+
 } 

@@ -53,7 +53,6 @@ export function BookIndex() {
     // }
 
     function onSelectBook(book) {
-        console.log('selected book', book)
         setSelectedBook(book)
     }
 
