@@ -5,6 +5,7 @@ const { Link } = ReactRouterDOM
 import { bookService } from "../services/book.service.js"
 
 import { LongTxt } from "../cmps/LongTxt.jsx"
+import { AddReview } from "../cmps/AddReview.jsx"
 
 export function BookDetails() {
 	const [isLoading, setIsLoading] = useState(true)
@@ -68,7 +69,9 @@ export function BookDetails() {
 				<p className={getPriceClass()}>Price:{book.listPrice.amount} : {book.listPrice.currencyCode}</p>
 			</aside>
 		</main>
-
+		<div>
+			<AddReview />
+		</div>
 		<div className="nav-books">
 			<Link to={`/book/${book.prevBookId}`}><button>Prev</button></Link>
 			<Link to={`/book/edit/${book.id}`}><button>Edit book</button></Link>
