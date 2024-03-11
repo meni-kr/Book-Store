@@ -11,7 +11,6 @@ export function BookDetails() {
 	const [book, setBook] = useState(null)
 	const params = useParams()
 	const navigate = useNavigate()
-	// Render time methods
 
 	useEffect(() => {
 		loadBook()

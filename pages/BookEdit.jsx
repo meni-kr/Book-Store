@@ -2,7 +2,7 @@ const { useState, useEffect } = React
 const { useNavigate, useParams } = ReactRouter
 
 import { bookService } from "../services/book.service.js"
-// import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 
 
 export function BookEdit() {
@@ -24,19 +24,18 @@ export function BookEdit() {
             })
     }
 
-
     function onSaveBook(ev) {
         ev.preventDefault()
 
         bookService.save(bookToEdit)
             .then(savedBook => {
                 navigate('/book')
-                // showSuccessMsg('Book saved successfully')
+                showSuccessMsg('Book saved successfully')
                 console.log('savedBook', savedBook)
             })
             .catch(err => {
                 console.log('Had issues saving book', err)
-                // showErrorMsg('could not save book')
+                showErrorMsg('could not save book')
             })
 
     }
@@ -61,7 +60,6 @@ export function BookEdit() {
             default:
                 break
         }
-
 
         if (field === 'price') {
             setBookToEdit((prevBook) => ({ ...prevBook, listPrice: { ...prevBook.listPrice, amount: value } }))
