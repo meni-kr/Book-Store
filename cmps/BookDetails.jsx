@@ -39,7 +39,7 @@ export function BookDetails({ book, onGoBack }) {
 				<p>{getPublishedDate()}</p>
 				<p>{getReadingType()}</p>
 				<p>categories: {book.categories.join(', ')}</p>
-				<p><LongTxt txt={book.description} /></p>
+				<LongTxt txt={book.description} />
 				<p className={getPriceClass()}>Price:{book.listPrice.amount} : {book.listPrice.currencyCode}</p>
 			</aside>
 		</main>
