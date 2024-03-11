@@ -1,8 +1,34 @@
+const { useState, useEffect } = React
+const { useParams, useNavigate } = ReactRouter
+const { Link } = ReactRouterDOM
+
+import { bookService } from "../services/book.service.js"
+
 import { LongTxt } from "../cmps/LongTxt.jsx"
 
-export function BookDetails({ book, onGoBack }) {
+export function BookDetails() {
+	const [isLoading, setIsLoading] = useState(true)
+	const [book, setBook] = useState(null)
+	const params = useParams()
+	const navigate = useNavigate()
 	// Render time methods
 
+	useEffect(() => {
+		loadBook()
+	}, [params.bookId])
+
+	function loadBook() {
+		setIsLoading(true)
+		bookService.get(params.bookId)
+			.then(book => setBook(book))
+			.catch(err => {
+				console.log('Had issues loading book', err)
+				navigate('/book')
+			})
+			.finally(() => {
+				setIsLoading(false)
+			})
+	}
 
 	function getReadingType() {
 		if (book.pageCount > 500) return 'Serious Reading!'
@@ -23,11 +49,11 @@ export function BookDetails({ book, onGoBack }) {
 		else if (book.listPrice.amount < 20) return ' green'
 		else return ''
 	}
-
+	if (isLoading) return <div>Loading details..</div>
 	return <section className="book-details">
 		<h3>{book.listPrice.isOnSale && <img className="on-sale" src='/assets/img/Sale1.png' />}</h3>
 		<header className="book-details-header">
-			<button className="btn-go-back" onClick={onGoBack}>Go back</button>
+			<Link to="/book"><button className="btn-go-back">Go back</button></Link>
 			<h1>Title : {book.title}</h1>
 			<p>author: {book.authors.join(', ')}</p>
 			<h2>subtitle : {book.subtitle}</h2>
@@ -44,6 +70,11 @@ export function BookDetails({ book, onGoBack }) {
 			</aside>
 		</main>
 
+		<div className="nav-books">
+			<Link to={`/book/${book.prevBookId}`}><button>Prev</button></Link>
+			<Link to={`/book/edit/${book.id}`}><button>Edit book</button></Link>
+			<Link to={`/book/${book.nextBookId}`}><button>Next</button></Link>
+		</div>
 
 	</section>
 }
