@@ -11,7 +11,7 @@ export function BookIndex() {
     const [books, setBooks] = useState(null)
     const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter())
     const [selectedBook, setSelectedBook] = useState(null)
-    // const [userMsg, setUserMsg] = useState('')
+    const [userMsg, setUserMsg] = useState('')
 
     useEffect(() => {
         loadBooks()
@@ -28,17 +28,17 @@ export function BookIndex() {
             })
     }
 
-    // function onRemoveCar(carId) {
-    //     carService.remove(carId)
-    //         .then(() => {
-    //             setCars((prevCars) => prevCars.filter(car => car.id !== carId))
-    //             flashMsg(`Car removed successfully (${carId})`)
-    //         })
-    //         .catch((err) => {
-    //             console.log('Had issues removing car', err)
-    //             flashMsg(`Could not remove car (${carId})`)
-    //         })
-    // }
+    function onRemoveBook(bookId) {
+        bookService.remove(bookId)
+            .then(() => {
+                setBooks((prevBook) => prevBook.filter(book => book.id !== bookId))
+                flashMsg(`Book removed successfully (${bookId})`)
+            })
+            .catch((err) => {
+                console.log('Had issues removing book', err)
+                flashMsg(`Could not remove book (${bookId})`)
+            })
+    }
 
     // function onUpdateCar(carToUpdate) {
     //     carService.save(carToUpdate)
@@ -56,12 +56,12 @@ export function BookIndex() {
         setSelectedBook(book)
     }
 
-    // function flashMsg(txt) {
-    //     setUserMsg(txt)
-    //     setTimeout(() => {
-    //         setUserMsg('')
-    //     }, 3000)
-    // }
+    function flashMsg(txt) {
+        setUserMsg(txt)
+        setTimeout(() => {
+            setUserMsg('')
+        }, 3000)
+    }
 
     if (!books) return <div>loading...</div>
     return <section className="book-index">
@@ -73,7 +73,7 @@ export function BookIndex() {
                 <h1>Our Books</h1>
                 <BookList
                     books={books}
-                    // onRemoveCar={onRemoveCar}
+                    onRemoveBook={onRemoveBook}
                     // onUpdateCar={onUpdateCar}
                     onSelectBook={onSelectBook}
                 />
