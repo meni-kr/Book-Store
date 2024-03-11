@@ -69,6 +69,7 @@ export function BookIndex() {
                 onSetFilter={onSetFilter}
                 filterBy={filterBy} />
                 <h1>Our Books</h1>
+                <Link to="/book/edit"><button>Add a book</button></Link>
                 <BookList
                     books={books}
                     onRemoveBook={onRemoveBook}
@@ -77,7 +78,6 @@ export function BookIndex() {
                 />
             </React.Fragment>
         }
-<Link to="/book/edit"><button>Add a book</button></Link>
         
      {/* <UserMsg msg={userMsg} /> */}
 
