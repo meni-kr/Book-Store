@@ -2,7 +2,7 @@ import { utilService } from './util.service.js'
 import { storageService } from './async-storage.service.js'
 
 import { demoBooks } from '../booksDemo.js'
-console.log('books:', demoBooks)
+
 
 const BOOK_KEY = 'bookDB'
 var gFilterBy 
@@ -46,6 +46,7 @@ function save(book) {
     if (book.id) {
         return storageService.put(BOOK_KEY, book)
     } else {
+        book = _createBook(book.title, book.listPrice.amount)
         return storageService.post(BOOK_KEY, book)
     }
 }
@@ -57,17 +58,17 @@ function getEmptyBook(title = '', amount = 0) {
         id:'',
         title,
         subtitle: '',
-        authors: [ "Barbara Cartland" ],
+        authors: [],
         publishedDate: utilService.getRandomIntInclusive(1990,2003),
         description: utilService.makeLorem(50),
         pageCount: utilService.getRandomIntInclusive(80,300),
-        categories: [ "Computers", "Hack" ],
-        thumbnail: "http://ca.org/books-photos/20.jpg",
-        language: "en",
+        categories: [],
+        thumbnail: '',
+        language: '',
         listPrice: { 
-        amount,
-        currencyCode: "EUR",
-        isOnSale: false
+            amount,
+            currencyCode: '',
+             isOnSale: false
         }
     }
 }
