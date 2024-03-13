@@ -5,7 +5,7 @@ import { demoBooks } from '../booksDemo.js'
 
 
 const BOOK_KEY = 'bookDB'
-var gFilterBy 
+var gFilterBy
 _createBooks()
 
 export const bookService = {
@@ -56,12 +56,12 @@ function save(book) {
 function addReview(bookId, review) {
     get(bookId)
         .then(book => {
-            if(!book.reviews || !book.reviews.length)  {
-                book.reviews = [{ ...review }]
+            if (!book.reviews || !book.reviews.length) {
+                book.reviews = [{ ...review, id: utilService.makeId() }]
                 save(book)
             }
             else {
-                book.reviews.unshift({ ...review })
+                book.reviews.unshift({ ...review,id: utilService.makeId() })
                 save(book)
             }
         }
@@ -72,20 +72,20 @@ function addReview(bookId, review) {
 function getEmptyBook(title = '', amount = 0) {
     // return { id: '', title, listPrice }
     return {
-        id:'',
+        id: '',
         title,
         subtitle: '',
         authors: [],
-        publishedDate: utilService.getRandomIntInclusive(1990,2003),
+        publishedDate: utilService.getRandomIntInclusive(1990, 2003),
         description: utilService.makeLorem(50),
-        pageCount: utilService.getRandomIntInclusive(80,300),
+        pageCount: utilService.getRandomIntInclusive(80, 300),
         categories: [],
         thumbnail: '',
         language: '',
-        listPrice: { 
+        listPrice: {
             amount,
             currencyCode: '',
-             isOnSale: false
+            isOnSale: false
         }
     }
 }
@@ -97,11 +97,11 @@ function getDefaultFilter() {
 }
 
 function getFilterBy() {
-    return {...gFilterBy}
+    return { ...gFilterBy }
 }
 
 function setFilterBy(filterBy = {}) {
-     if (filterBy.txt !== undefined) gFilterBy.txt = filterBy.txt
+    if (filterBy.txt !== undefined) gFilterBy.txt = filterBy.txt
     if (filterBy.minSpeed !== undefined) gFilterBy.minSpeed = filterBy.minSpeed
     return gFilterBy
 }
